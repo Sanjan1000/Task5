@@ -1,0 +1,19 @@
+current directory: /home/sanjan1000/OnlyMine/Internship/dataGen/vendor/bundle/ruby/3.1.0/gems/debug-1.9.2/ext/debug
+/home/sanjan1000/.rbenv/versions/3.1.2/bin/ruby extconf.rb
+creating Makefile
+
+current directory: /home/sanjan1000/OnlyMine/Internship/dataGen/vendor/bundle/ruby/3.1.0/gems/debug-1.9.2/ext/debug
+make DESTDIR\= sitearchdir\=./.gem.20240502-97391-718td9 sitelibdir\=./.gem.20240502-97391-718td9 clean
+
+current directory: /home/sanjan1000/OnlyMine/Internship/dataGen/vendor/bundle/ruby/3.1.0/gems/debug-1.9.2/ext/debug
+make DESTDIR\= sitearchdir\=./.gem.20240502-97391-718td9 sitelibdir\=./.gem.20240502-97391-718td9
+compiling debug.c
+compiling iseq_collector.c
+linking shared-object debug/debug.so
+
+current directory: /home/sanjan1000/OnlyMine/Internship/dataGen/vendor/bundle/ruby/3.1.0/gems/debug-1.9.2/ext/debug
+make DESTDIR\= sitearchdir\=./.gem.20240502-97391-718td9 sitelibdir\=./.gem.20240502-97391-718td9 install
+/usr/bin/install -c -m 0755 debug.so ./.gem.20240502-97391-718td9/debug
+
+current directory: /home/sanjan1000/OnlyMine/Internship/dataGen/vendor/bundle/ruby/3.1.0/gems/debug-1.9.2/ext/debug
+make DESTDIR\= sitearchdir\=./.gem.20240502-97391-718td9 sitelibdir\=./.gem.20240502-97391-718td9 clean

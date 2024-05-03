@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>User Data Generator</title>
+  <link rel="stylesheet" href="https://cdn.simplecss.org/simple.min.css"/>
+</head>
+<body>
+<h1>User Data Generator</h1>
+
+<%= form_tag(users_path, method: :get, remote: true) do %>
+  <div>
+    <label>Region:</label>
+    <%= select_tag :region, options_for_select(['Poland', 'USA', 'Georgia'], selected: params[:region]), id: 'region' %>
+  </div>
+
+  <div>
+    <label>Error rate:</label>
+    <%= range_field_tag :error_rate, params[:error_rate] || 0, min: 0, max: 1000, step: 1, id: 'error_rate' %>
+    <%= number_field_tag :error_rate_number, params[:error_rate] || 0, min: 0, max: 1000, id: 'error_rate_number' %>
+  </div>
+
+  <div>
+    <label>Seed:</label>
+    <%= number_field_tag :seed, params[:seed] || 0, id: 'seed' %>
+    <button type="button" onclick="generateSeed()">Random</button>
+  </div>
+<% end %>
+<div id="user-table">
+  <table>
+  <thead>
+    <tr>
+      <th>Index</th>
+      <th>Identifier</th>
+      <th>Name</th>
+      <th>Address</th>
+      <th>Phone</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @users.each do |user| %>
+      <tr>
+        <td><%= user.index %></td>
+        <td><%= user.identifier %></td>
+        <td><%= user.name %></td>
+        <td><%= user.address %></td>
+        <td><%= user.phone %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table></div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+  let currentPage = 1;
+  let isFetching = false;
+
+  function updateTable() {
+    const region = document.getElementById('region').value;
+    const errorRate = document.getElementById('error_rate').value;
+    const seed = document.getElementById('seed').value;
+
+    fetch(`/users?region=${region}&error_rate=${errorRate}&seed=${seed}&page=1`)
+      .then(response => response.text())
+      .then(html => {
+        const parser = new DOMParser();
+        const doc = parser.parseFromString(html, "text/html");
+        document.querySelector('#user-table tbody').innerHTML = doc.querySelector('tbody').innerHTML;
+        currentPage = 1; // Reset pagination after form update
+      });
+  }
+
+  function generateSeed() {
+    const seedInput = document.getElementById('seed');
+    seedInput.value = Math.floor(Math.random() * 1000000);
+    updateTable(); 
+  }
+  window.generateSeed = generateSeed;
+  document.getElementById('error_rate').addEventListener('input',function(){
+    document.getElementById('error_rate_number').value=this.value;
+    updateTable();
+  });
+  
+  document.getElementById('error_rate_number').addEventListener('input',function(){
+    document.getElementById('error_rate').value=this.value;
+    updateTable();
+  });
+  document.getElementById('region').addEventListener('input',function(){
+    document.getElementById('seed').value=this.value;
+    updateTable();
+  });
+
+  function loadMoreUsers(page) {
+    if (isFetching) return;
+    isFetching = true;
+    const region = document.getElementById('region').value;
+    const errorRate = document.getElementById('error_rate').value;
+    const seed = document.getElementById('seed').value;
+
+    fetch(`/users?region=${region}&error_rate=${errorRate}&seed=${seed}&page=${page}&per_page=10`)
+      .then(response => response.text())
+      .then(html => {
+        const parser = new DOMParser();
+        const doc = parser.parseFromString(html, "text/html");
+        const newRows = doc.querySelector('tbody').innerHTML;
+        document.querySelector('#user-table tbody').insertAdjacentHTML('beforeend', newRows);
+        isFetching = false;
+      }).catch(error => {
+        console.log('Error:', error);
+        isFetching = false;
+      });
+  }
+
+  window.addEventListener('scroll', function() {
+    if (window.innerHeight + window.pageYOffset >= document.body.offsetHeight - 100) {
+      currentPage++;
+      loadMoreUsers(currentPage);
+    }
+  });
+
+});
+</script>
+</body>
+</html>

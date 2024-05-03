@@ -1,0 +1,22 @@
+current directory: /home/sanjan1000/OnlyMine/Internship/dataGen/vendor/bundle/ruby/3.1.0/gems/bootsnap-1.18.3/ext/bootsnap
+/home/sanjan1000/.rbenv/versions/3.1.2/bin/ruby extconf.rb
+checking for fdatasync() in unistd.h... yes
+checking for whether -D_GNU_SOURCE is accepted as CPPFLAGS... yes
+checking for whether -O3 is accepted as CFLAGS... yes
+checking for whether -std=c99 is accepted as CFLAGS... yes
+creating Makefile
+
+current directory: /home/sanjan1000/OnlyMine/Internship/dataGen/vendor/bundle/ruby/3.1.0/gems/bootsnap-1.18.3/ext/bootsnap
+make DESTDIR\= sitearchdir\=./.gem.20240502-97391-t96ied sitelibdir\=./.gem.20240502-97391-t96ied clean
+
+current directory: /home/sanjan1000/OnlyMine/Internship/dataGen/vendor/bundle/ruby/3.1.0/gems/bootsnap-1.18.3/ext/bootsnap
+make DESTDIR\= sitearchdir\=./.gem.20240502-97391-t96ied sitelibdir\=./.gem.20240502-97391-t96ied
+compiling bootsnap.c
+linking shared-object bootsnap/bootsnap.so
+
+current directory: /home/sanjan1000/OnlyMine/Internship/dataGen/vendor/bundle/ruby/3.1.0/gems/bootsnap-1.18.3/ext/bootsnap
+make DESTDIR\= sitearchdir\=./.gem.20240502-97391-t96ied sitelibdir\=./.gem.20240502-97391-t96ied install
+/usr/bin/install -c -m 0755 bootsnap.so ./.gem.20240502-97391-t96ied/bootsnap
+
+current directory: /home/sanjan1000/OnlyMine/Internship/dataGen/vendor/bundle/ruby/3.1.0/gems/bootsnap-1.18.3/ext/bootsnap
+make DESTDIR\= sitearchdir\=./.gem.20240502-97391-t96ied sitelibdir\=./.gem.20240502-97391-t96ied clean
