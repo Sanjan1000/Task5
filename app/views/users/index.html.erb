@@ -84,10 +84,8 @@ document.addEventListener('DOMContentLoaded', function () {
     document.getElementById('error_rate').value=this.value;
     updateTable();
   });
-  document.getElementById('region').addEventListener('input',function(){
-    document.getElementById('seed').value=this.value;
-    updateTable();
-  });
+  document.getElementById('region').addEventListener('input',updateTable);
+  document.getElementById('seed').addEventListener('input',updateTable);
 
   function loadMoreUsers(page) {
     if (isFetching) return;
